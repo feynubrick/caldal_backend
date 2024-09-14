@@ -1,0 +1,5 @@
+.python-version
+.venv/
+.vscode/
+.idea/
+*.sqlite3

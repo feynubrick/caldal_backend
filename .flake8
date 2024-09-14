@@ -1,0 +1,10 @@
+# Use flake8 to check code style
+
+[flake8]
+# max-line-length = 88
+exclude = .venv, */migrations/*, .git, venv, config/settings/*
+per-file-ignores =
+    # F401: module imported but unused
+    # F403: ‘from module import *’ used; unable to detect undefined names
+    # F405: name may be undefined, or defined from star imports: module
+    __init__.py: F401, F403, F405
