@@ -20,7 +20,7 @@ class Event(models.Model):
         db_comment="이벤트 내용",
         help_text=_("이벤트 내용"),
     )
-    is_all_day = models.DateField(
+    is_all_day = models.BooleanField(
         null=False,
         blank=False,
         db_comment="하루 종일 지속되는 이벤트인지 나타내는 값",
