@@ -3,7 +3,7 @@ from typing import List
 from django.http import HttpRequest
 from ninja import Path, Query, Router
 
-from ..paths import PathParamEvent
+from ..paths import PathParamSchedule
 from .filters import ScheduleFilterSchema
 from .models import Schedule
 from .schemes.schedule import (
@@ -46,7 +46,7 @@ def get_events(
 )
 def update_event(
     request: HttpRequest,
-    schedule_path_param: Path[PathParamEvent],
+    schedule_path_param: Path[PathParamSchedule],
     req_body: UpdateScheduleInSchema,
 ):
     event = schedule_path_param.value()
@@ -62,7 +62,7 @@ def update_event(
 )
 def delete_event(
     request: HttpRequest,
-    schedule_path_param: Path[PathParamEvent],
+    schedule_path_param: Path[PathParamSchedule],
 ):
     event = schedule_path_param.value()
     event.delete()
