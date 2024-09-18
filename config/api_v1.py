@@ -1,8 +1,14 @@
-from ninja import NinjaAPI, Swagger
+from ninja import Swagger
+from ninja_extra import NinjaExtraAPI
+from ninja_jwt.controller import NinjaJWTDefaultController
 
 from config.renderers import OrjsonRenderer
-from domain.schedule.api import router as schedule_router
+from domain.schedule.controllers.schedule import ScheduleController
 
-api = NinjaAPI(renderer=OrjsonRenderer(), docs=Swagger())
+api = NinjaExtraAPI(
+    renderer=OrjsonRenderer(),
+    docs=Swagger(),
+)
 
-api.add_router("schedule", schedule_router)
+api.register_controllers(NinjaJWTDefaultController)
+api.register_controllers(ScheduleController)

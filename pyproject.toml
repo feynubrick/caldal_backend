@@ -12,6 +12,7 @@ python-dotenv = "^1.0.1"
 pre-commit = "^3.8.0"
 pyhumps = "^3.8.0"
 orjson = "^3.10.7"
+django-ninja-jwt = "^5.3.3"
 
 
 [build-system]
