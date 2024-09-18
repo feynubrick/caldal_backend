@@ -1,11 +1,11 @@
 from django.shortcuts import get_object_or_404
 from ninja import Schema
 
-from domain.schedule.models import Event
+from domain.schedule.models import Schedule
 
 
 class PathParamEvent(Schema):
     event_id: int
 
-    def value(self) -> Event:
-        return get_object_or_404(Event, id=self.event_id)
+    def value(self) -> Schedule:
+        return get_object_or_404(Schedule, id=self.event_id)
