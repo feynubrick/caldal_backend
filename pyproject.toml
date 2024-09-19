@@ -4,6 +4,8 @@ version = "0.1.0"
 description = ""
 authors = ["Seung-Yoon Oh <feynubrick@proton.me>"]
 readme = "README.md"
+package-mode = false
+
 
 [tool.poetry.dependencies]
 python = "^3.12"
@@ -13,6 +15,7 @@ pre-commit = "^3.8.0"
 pyhumps = "^3.8.0"
 orjson = "^3.10.7"
 django-ninja-jwt = "^5.3.3"
+django-ninja-extra = "^0.21.4"
 
 
 [build-system]

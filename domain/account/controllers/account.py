@@ -1,0 +1,24 @@
+from django.contrib.auth.models import User
+from ninja_extra import ControllerBase, api_controller, route
+from ninja_jwt.tokens import RefreshToken
+
+from domain.account.schemes import CreateAccountInSchema, CreateAccountOutSchema
+
+
+@api_controller(
+    "account/accounts",
+    tags=["account"],
+    permissions=[],
+)
+class AccountController(ControllerBase):
+    @route.post("", response={201: CreateAccountOutSchema}, by_alias=True)
+    def create_account(self, req_body: CreateAccountInSchema):
+        data = req_body.dict()
+        data["username"] = data["email"]
+        user = User.objects.create_user(**data)
+        refresh_token = RefreshToken.for_user(user)
+
+        return {
+            "refresh": str(refresh_token),
+            "access": str(refresh_token.access_token),
+        }
