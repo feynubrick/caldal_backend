@@ -6,12 +6,12 @@ from domain.account.schemes import CreateAccountInSchema, CreateAccountOutSchema
 
 
 @api_controller(
-    "account/accounts",
+    "account",
     tags=["account"],
     permissions=[],
 )
 class AccountController(ControllerBase):
-    @route.post("", response={201: CreateAccountOutSchema}, by_alias=True)
+    @route.post("/sign-up", response={201: CreateAccountOutSchema}, by_alias=True)
     def create_account(self, req_body: CreateAccountInSchema):
         data = req_body.dict()
         data["username"] = data["email"]
