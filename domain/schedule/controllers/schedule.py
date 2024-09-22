@@ -31,7 +31,7 @@ class ScheduleController(ControllerBase):
             raise PermissionDenied()
 
     @route.post(
-        "/",
+        "",
         by_alias=True,
         response={200: ScheduleOutSchema},
     )
