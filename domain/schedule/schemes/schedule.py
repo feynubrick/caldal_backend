@@ -12,7 +12,9 @@ _fields = [
 ]
 
 ScheduleBaseSchema = create_schema(_model, fields=_fields)
-ScheduleAllOptionalBaseSchema = create_schema(_model, optional_fields=_fields)
+ScheduleAllOptionalBaseSchema = create_schema(
+    _model, fields=_fields, optional_fields=_fields
+)
 
 
 class CreateScheduleInSchema(ScheduleBaseSchema):

@@ -11,6 +11,16 @@ class Schedule(models.Model):
         verbose_name_plural = "Schedules"
         ordering = ["id"]
 
+    owner = models.ForeignKey(
+        "account.User",
+        on_delete=models.CASCADE,
+        related_name="schedules",
+        blank=False,
+        null=False,
+        verbose_name=_("Owner"),
+        db_comment="Owner of the schedule",
+        help_text=_("Owner of the schedule"),
+    )
     content = models.TextField(
         null=True,
         blank=True,

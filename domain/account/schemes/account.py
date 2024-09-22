@@ -1,7 +1,9 @@
+from django.contrib.auth import get_user_model
 from ninja import ModelSchema, Schema
 
-from domain.account.models import User
 from util.schemes import CamelCaseConfig
+
+User = get_user_model()
 
 
 class CreateAccountInSchema(ModelSchema):
