@@ -39,7 +39,7 @@ class ScheduleController(ControllerBase):
         return Schedule.objects.create(owner=request.user, **req_body.dict())
 
     @route.get(
-        "/",
+        "",
         by_alias=True,
         response={200: List[ScheduleOutSchema]},
     )
