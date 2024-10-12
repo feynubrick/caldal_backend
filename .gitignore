@@ -4,3 +4,4 @@
 .idea/
 *.sqlite3
 *.isorted
+.env
