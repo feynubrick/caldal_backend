@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from ninja_extra import ControllerBase, api_controller, route
 from ninja_jwt.tokens import RefreshToken
 
-from domain.account.schemes import CreateAccountInSchema, CreateAccountOutSchema
+from caldal.domain.account.schemas import CreateAccountInSchema, CreateAccountOutSchema
 
 User = get_user_model()
 

@@ -3,7 +3,7 @@ import datetime
 from django.utils.translation import gettext_lazy as _
 from ninja import Field, FilterSchema, Schema
 
-from util.schemes import CamelCaseConfig
+from caldal.util.schemes import CamelCaseConfig
 
 
 class ScheduleFilterSchema(FilterSchema):

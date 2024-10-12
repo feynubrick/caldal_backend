@@ -1,9 +1,9 @@
 from ninja import Swagger
 from ninja_extra import NinjaExtraAPI
 
-from config.renderers import OrjsonRenderer
-from domain.account.controllers import AccountController, AuthController
-from domain.schedule.controllers.schedule import ScheduleController
+from caldal.config.renderers import OrjsonRenderer
+from caldal.domain.account.controllers import AccountController, AuthController
+from caldal.domain.schedule.controllers import ScheduleController
 
 api = NinjaExtraAPI(
     renderer=OrjsonRenderer(),

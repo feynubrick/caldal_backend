@@ -29,8 +29,8 @@ INSTALLED_APPS = [
     "ninja",
     "ninja_extra",
     "ninja_jwt",
-    "domain.account",
-    "domain.schedule",
+    "caldal.domain.account",
+    "caldal.domain.schedule",
 ]
 
 MIDDLEWARE = [
@@ -43,7 +43,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "config.urls"
+ROOT_URLCONF = "caldal.config.urls"
 
 TEMPLATES = [
     {
@@ -61,7 +61,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "config.wsgi.application"
+WSGI_APPLICATION = "caldal.config.wsgi.application"
 
 
 # Database

@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404
 from ninja import Schema
 
-from domain.schedule.models import Schedule
+from caldal.domain.schedule.models import Schedule
 
 
 class PathParamSchedule(Schema):

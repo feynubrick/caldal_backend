@@ -1,7 +1,7 @@
 from ninja.orm import create_schema
 
-from domain.schedule.models import Schedule
-from util.schemes import CamelCaseConfig
+from caldal.domain.schedule.models import Schedule
+from caldal.util.schemes import CamelCaseConfig
 
 _model = Schedule
 _fields = [

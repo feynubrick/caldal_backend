@@ -7,10 +7,10 @@ from ninja_extra import ControllerBase, api_controller, permissions, route
 from ninja_extra.exceptions import PermissionDenied
 from ninja_jwt.authentication import JWTAuth
 
-from domain.paths import PathParamSchedule
-from domain.schedule.filters import ScheduleFilterSchema
-from domain.schedule.models import Schedule
-from domain.schedule.schemes.schedule import (
+from caldal.domain.paths import PathParamSchedule
+from caldal.domain.schedule.filters import ScheduleFilterSchema
+from caldal.domain.schedule.models import Schedule
+from caldal.domain.schedule.schemas import (
     CreateScheduleInSchema,
     ScheduleOutSchema,
     UpdateScheduleInSchema,
