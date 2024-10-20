@@ -7,7 +7,7 @@ from ninja_jwt.tokens import RefreshToken
 
 from caldal.domain.account.const.enums import OAuthProviderEnum
 from caldal.domain.account.models import OAuthProfile, User
-from caldal.domain.account.schemas.auth import SignInGoogleInSchema
+from caldal.domain.account.schemas import SignInGoogleInSchema
 
 
 @api_controller(

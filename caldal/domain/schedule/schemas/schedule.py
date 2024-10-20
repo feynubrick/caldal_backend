@@ -1,7 +1,7 @@
 from ninja.orm import create_schema
 
 from caldal.domain.schedule.models import Schedule
-from caldal.util.schemas import CamelCaseConfig
+from caldal.util.schemas import CamelCaseSchema
 
 _model = Schedule
 _fields = [
@@ -11,24 +11,28 @@ _fields = [
     "end_time",
 ]
 
-ScheduleBaseSchema = create_schema(_model, fields=_fields)
+ScheduleBaseSchema = create_schema(
+    _model,
+    fields=_fields,
+    base_class=CamelCaseSchema,
+)
 ScheduleAllOptionalBaseSchema = create_schema(
-    _model, fields=_fields, optional_fields=_fields
+    _model,
+    fields=_fields,
+    optional_fields=_fields,
+    base_class=CamelCaseSchema,
 )
 
 
 class CreateScheduleInSchema(ScheduleBaseSchema):
-    class Config(CamelCaseConfig, ScheduleBaseSchema.Config):
-        pass
+    pass
 
 
 class UpdateScheduleInSchema(ScheduleAllOptionalBaseSchema):
-    class Config(CamelCaseConfig, ScheduleBaseSchema.Config):
-        pass
+    pass
 
 
 class ScheduleOutSchema(ScheduleBaseSchema):
-    class Config(CamelCaseConfig, ScheduleBaseSchema.Config):
-        pass
+    pass
 
     id: int
