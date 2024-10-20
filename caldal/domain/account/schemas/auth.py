@@ -1,18 +1,21 @@
-from ninja import Schema
-
-from caldal.util.schemes import CamelCaseConfig
+from caldal.util.schemas import CamelCaseSchema
 
 
-class SignInGoogleInSchema(Schema):
+class SignInGoogleInSchema(CamelCaseSchema):
     id_token: str
 
-    class Config(CamelCaseConfig, Schema.Config):
-        pass
 
-
-class AuthTokenOutSchema(Schema):
-    refresh_token: str
+class AuthAccessTokenOutSchema(CamelCaseSchema):
     access_token: str
 
-    class Config(CamelCaseConfig, Schema.Config):
-        pass
+
+class AuthTokenOutSchema(AuthAccessTokenOutSchema):
+    refresh_token: str
+
+
+class RefreshTokenInSchema(CamelCaseSchema):
+    refresh_token: str
+
+
+class RefreshTokenOutSchema(AuthAccessTokenOutSchema):
+    pass

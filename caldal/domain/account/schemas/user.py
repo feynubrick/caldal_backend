@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from ninja import ModelSchema, Schema
 
-from caldal.util.schemes import CamelCaseConfig
+from caldal.util.schemas import CamelCaseConfig
 
 User = get_user_model()
 
