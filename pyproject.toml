@@ -16,6 +16,11 @@ pyhumps = "^3.8.0"
 orjson = "^3.10.7"
 django-ninja-jwt = "^5.3.3"
 django-ninja-extra = "^0.21.4"
+google-api-python-client = "^2.149.0"
+google-auth = "^2.35.0"
+google-auth-oauthlib = "^1.2.1"
+google-auth-httplib2 = "^0.2.0"
+requests = "^2.32.3"
 
 
 [build-system]
