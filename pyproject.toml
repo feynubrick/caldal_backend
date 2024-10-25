@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "calendar-scheduler-backend"
+name = "caldal-backend"
 version = "0.1.0"
 description = ""
 authors = ["Seung-Yoon Oh <feynubrick@proton.me>"]
@@ -21,6 +21,8 @@ google-auth = "^2.35.0"
 google-auth-oauthlib = "^1.2.1"
 google-auth-httplib2 = "^0.2.0"
 requests = "^2.32.3"
+django-extensions = "^3.2.3"
+psycopg = "^3.2.3"
 
 
 [build-system]
