@@ -6,7 +6,7 @@ ALLOWED_HOSTS = [
     "localhost",
     "10.0.2.2",
     "14.40.31.174",
-    "home.feynubrick.link",
+    "caldal-backend.feynubrick.link",
 ]
 
 NINJA_JWT = {
