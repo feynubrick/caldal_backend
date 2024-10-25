@@ -6,3 +6,4 @@
 *.isorted
 *.env
 static/
+__pycache__/
