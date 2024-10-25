@@ -16,7 +16,7 @@ services:
     volumes:
       - .:/app
     ports:
-      - "8011:8000"
+      - "8011:80"
     depends_on:
       - db
     env_file:
