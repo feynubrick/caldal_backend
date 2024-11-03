@@ -11,7 +11,7 @@ class Schedule(models.Model):
         app_label = "schedule"
         verbose_name = "Schedule"
         verbose_name_plural = "Schedules"
-        ordering = ["id"]
+        ordering = ["owner", "start_time"]
 
     owner = models.ForeignKey(
         "account.User",
@@ -22,6 +22,16 @@ class Schedule(models.Model):
         verbose_name=_("Owner"),
         db_comment="스케쥴 소유자",
         help_text=_("스케쥴 소유자"),
+    )
+    group = models.ForeignKey(
+        "schedule.ScheduleGroup",
+        on_delete=models.PROTECT,
+        related_name="schedules",
+        blank=False,
+        null=False,
+        verbose_name=_("Group"),
+        db_comment="스케쥴 그룹",
+        help_text=_("스케쥴 그룹"),
     )
     title = models.CharField(
         max_length=SCHEDULE_TITLE_MAX_LENGTH,
@@ -50,3 +60,4 @@ class Schedule(models.Model):
         db_comment="종료 시간",
         help_text=_("종료 시간"),
     )
+    created_at = models.DateTimeField()
