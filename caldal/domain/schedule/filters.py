@@ -6,10 +6,9 @@ from django.utils.translation import gettext_lazy as _
 from ninja import Field, FilterSchema
 
 from caldal.util.filters import handle_filter_empty_value
-from caldal.util.schemas import CamelCaseSchemaMixin
 
 
-class ScheduleFilterSchema(CamelCaseSchemaMixin, FilterSchema):
+class ScheduleFilterSchema(FilterSchema):
     date: datetime.date = Field(None, description=_("스케쥴의 날짜입니다"))
     date_from: datetime.date = Field(None, description=_("가져오려는 일정의 시작 일자"))
     date_to: datetime.date = Field(None, description=_("가져오려는 일정의 끝 일자"))

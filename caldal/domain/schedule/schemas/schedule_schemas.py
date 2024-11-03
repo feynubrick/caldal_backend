@@ -1,7 +1,7 @@
+from ninja import Schema
 from ninja.orm import create_schema
 
 from caldal.domain.schedule.models import Schedule
-from caldal.util.schemas import CamelCaseSchema
 
 _model = Schedule
 _fields = [
@@ -14,13 +14,13 @@ _fields = [
 ScheduleBaseSchema = create_schema(
     _model,
     fields=_fields,
-    base_class=CamelCaseSchema,
+    base_class=Schema,
 )
 ScheduleAllOptionalBaseSchema = create_schema(
     _model,
     fields=_fields,
     optional_fields=_fields,
-    base_class=CamelCaseSchema,
+    base_class=Schema,
 )
 
 
