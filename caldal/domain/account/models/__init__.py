@@ -1,2 +1,2 @@
-from .oauth_profile import OAuthProfile
-from .user import User
+from .oauth_profile_model import OAuthProfile
+from .user_model import User

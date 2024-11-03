@@ -1,1 +1,5 @@
-from .schedule import CreateScheduleInSchema, ScheduleOutSchema, UpdateScheduleInSchema
+from .schedule_schemas import (
+    CreateScheduleInSchema,
+    ScheduleOutSchema,
+    UpdateScheduleInSchema,
+)

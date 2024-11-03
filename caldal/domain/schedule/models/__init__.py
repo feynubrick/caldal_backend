@@ -1,1 +1,1 @@
-from .schedule import Schedule
+from .schedule_model import Schedule

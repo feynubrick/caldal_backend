@@ -1,1 +1,1 @@
-from .schedule import ScheduleController
+from .schedule_controller import ScheduleController
