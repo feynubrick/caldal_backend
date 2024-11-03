@@ -32,7 +32,6 @@ class ScheduleController(ControllerBase):
 
     @route.post(
         "",
-        by_alias=True,
         response={201: ScheduleOutSchema},
     )
     def create_schedule(self, request: HttpRequest, req_body: CreateScheduleInSchema):
@@ -40,7 +39,6 @@ class ScheduleController(ControllerBase):
 
     @route.get(
         "",
-        by_alias=True,
         response={200: List[ScheduleOutSchema]},
     )
     def get_schedules(
@@ -52,7 +50,6 @@ class ScheduleController(ControllerBase):
 
     @route.patch(
         "/{schedule_id}",
-        by_alias=True,
         response={200: ScheduleOutSchema},
     )
     def update_schedule(

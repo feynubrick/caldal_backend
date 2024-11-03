@@ -56,7 +56,6 @@ class AuthController(ControllerBase):
 
     @route.post(
         "/refresh",
-        by_alias=True,
         response={200: TokenRefreshInputSchema.get_response_schema()},
     )
     def refresh_token(self, request, req_body: TokenRefreshInputSchema):
