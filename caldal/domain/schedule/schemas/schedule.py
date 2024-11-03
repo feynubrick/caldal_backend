@@ -5,8 +5,8 @@ from caldal.util.schemas import CamelCaseSchema
 
 _model = Schedule
 _fields = [
+    "title",
     "content",
-    "date",
     "start_time",
     "end_time",
 ]

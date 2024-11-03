@@ -7,6 +7,10 @@ class CamelCaseConfig(Schema.Config):
     populate_by_name = True
 
 
-class CamelCaseSchema(Schema):
+class CamelCaseSchemaMixin:
     class Config(CamelCaseConfig, Schema.Config):
         pass
+
+
+class CamelCaseSchema(CamelCaseSchemaMixin, Schema):
+    pass

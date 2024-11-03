@@ -33,7 +33,7 @@ class ScheduleController(ControllerBase):
     @route.post(
         "",
         by_alias=True,
-        response={200: ScheduleOutSchema},
+        response={201: ScheduleOutSchema},
     )
     def create_schedule(self, request: HttpRequest, req_body: CreateScheduleInSchema):
         return Schedule.objects.create(owner=request.user, **req_body.dict())
@@ -55,29 +55,29 @@ class ScheduleController(ControllerBase):
         by_alias=True,
         response={200: ScheduleOutSchema},
     )
-    def update_event(
+    def update_schedule(
         self,
         request: HttpRequest,
         schedule_path_param: Path[PathParamSchedule],
         req_body: UpdateScheduleInSchema,
     ):
-        event = schedule_path_param.value()
-        self._validate_owner(request.user, event)
+        schedule = schedule_path_param.value()
+        self._validate_owner(request.user, schedule)
         update_data = req_body.dict(exclude_unset=True)
-        Schedule.objects.filter(id=event.id).update(**update_data)
-        event.refresh_from_db()
-        return event
+        Schedule.objects.filter(id=schedule.id).update(**update_data)
+        schedule.refresh_from_db()
+        return schedule
 
     @route.delete(
         "/{schedule_id}",
         response={204: None},
     )
-    def delete_event(
+    def delete_schedule(
         self,
         request: HttpRequest,
         schedule_path_param: Path[PathParamSchedule],
     ):
-        event = schedule_path_param.value()
-        self._validate_owner(request.user, event)
-        event.delete()
+        schedule = schedule_path_param.value()
+        self._validate_owner(request.user, schedule)
+        schedule.delete()
         return
