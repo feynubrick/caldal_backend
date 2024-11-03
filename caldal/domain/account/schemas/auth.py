@@ -1,5 +1,10 @@
-from caldal.util.schemas import CamelCaseSchema
+from ninja import Schema
 
 
-class SignInGoogleInSchema(CamelCaseSchema):
+class ProcessOAuthInSchema(Schema):
     id_token: str
+
+
+class IdTokenInfoSchema(Schema):
+    sub: str
+    email: str
