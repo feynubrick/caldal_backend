@@ -18,10 +18,10 @@ class OAuthProfile(models.Model):
         ordering = ["id"]
         unique_together = [["provider", "identifier"]]
 
-    user = models.OneToOneField(
+    user = models.ForeignKey(
         "account.User",
         on_delete=models.CASCADE,
-        related_name="oauth_profile",
+        related_name="oauth_profiles",
         db_comment="User profile",
         help_text=_("User profile"),
     )
