@@ -12,6 +12,9 @@ class ModelService(Generic[T], ABC):
     def get_queryset(self):
         return self._model.objects.all()
 
+    def exists(self, **kwargs) -> bool:
+        return self.get_queryset().filter(**kwargs).exists()
+
     def create(self, **kwargs):
         self._validate_create(**kwargs)
         return self.get_queryset().create(**kwargs)
