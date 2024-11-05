@@ -6,6 +6,7 @@ from caldal.domain.account.const.values import (
     OAUTH_IDENTIFIER_MAX_LENGTH,
     OAUTH_PROVIDER_MAX_LENGTH,
 )
+from caldal.util.fields import CreatedAtField
 
 
 class OAuthProfile(models.Model):
@@ -40,4 +41,4 @@ class OAuthProfile(models.Model):
         db_comment="플랫폼 내에서의 식별자",
         help_text=_("플랫폼 내에서의 식별자"),
     )
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = CreatedAtField()

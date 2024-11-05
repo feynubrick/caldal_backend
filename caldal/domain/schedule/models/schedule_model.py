@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from caldal.domain.schedule.consts.values import SCHEDULE_TITLE_MAX_LENGTH
+from caldal.util.fields import CreatedAtField
 
 
 class Schedule(models.Model):
@@ -60,4 +61,4 @@ class Schedule(models.Model):
         db_comment="종료 시간",
         help_text=_("종료 시간"),
     )
-    created_at = models.DateTimeField()
+    created_at = CreatedAtField()
