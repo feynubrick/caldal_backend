@@ -1,17 +1,16 @@
 from ninja_extra import ControllerBase, api_controller, route
 from ninja_jwt.schema import TokenObtainPairOutputSchema, TokenRefreshInputSchema
 
-from caldal.domain.account.business_services.auth_token_service import AuthTokenService
-from caldal.domain.account.business_services.oauth_service import OAuthService
+from caldal.domain.account.business_services import (
+    AuthTokenService,
+    CreateUserService,
+    CreateUserServiceInputSchema,
+    OAuthService,
+)
 from caldal.domain.account.const.enums import OAuthProviderEnum
+from caldal.domain.account.model_services import UserModelService
 from caldal.domain.account.models import User
 from caldal.domain.account.schemas import ProcessOAuthInSchema
-from caldal.domain.schedule.business_services.create_user_service.create_user_service import (
-    CreateUserService,
-)
-from caldal.domain.schedule.business_services.create_user_service.create_user_service_input_schema import (
-    CreateUserServiceInputSchema,
-)
 
 
 @api_controller(
@@ -34,13 +33,15 @@ class AuthController(ControllerBase):
         identifier = id_info.sub
         email = id_info.email
 
-        user_qs = User.objects.filter(
+        is_new_user = False
+        if UserModelService().exists(
             oauth_profiles__provider=provider,
             oauth_profiles__identifier=identifier,
-        )
-        is_new_user = False
-        if user_qs.exists():
-            user = user_qs.get()
+        ):
+            user = UserModelService().get(
+                oauth_profiles__provider=provider,
+                oauth_profiles__identifier=identifier,
+            )
         else:
             user = CreateUserService().run(
                 CreateUserServiceInputSchema(

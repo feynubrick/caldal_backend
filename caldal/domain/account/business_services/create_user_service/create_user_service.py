@@ -3,10 +3,9 @@ from caldal.domain.account.model_services import (
     UserModelService,
 )
 from caldal.domain.account.models import User
-from caldal.domain.schedule.business_services.create_user_service.create_user_service_input_schema import (
-    CreateUserServiceInputSchema,
-)
 from caldal.util.services.business_service import BusinessService
+
+from .create_user_service_input_schema import CreateUserServiceInputSchema
 
 
 class CreateUserService(BusinessService[CreateUserServiceInputSchema, User]):
