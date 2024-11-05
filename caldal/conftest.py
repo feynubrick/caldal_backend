@@ -8,7 +8,7 @@ from caldal.domain.account.schemas import IdTokenInfoSchema
 
 def _request_to_process_oauth(email: str, provider: str):
     with mock.patch(
-        "caldal.domain.account.services.OAuthService.verify_token"
+        "caldal.domain.account.business_services.OAuthService.verify_token"
     ) as verify_token_method:
         verify_token_method.return_value = IdTokenInfoSchema(sub=email, email=email)
 

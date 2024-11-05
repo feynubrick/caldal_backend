@@ -15,7 +15,7 @@ Feature: OAuth 처리
 
     Examples:
       | provider |
-      | GOOGLE   |
+      | google   |
 
   Scenario Outline: 회원가입한 사용자는 소셜 로그인으로 로그인할 수 있다.
     Given 이메일이 "a@gmail.com"인 사용자가 "<provider>" 로그인으로 회원가입했습니다.
@@ -31,4 +31,4 @@ Feature: OAuth 처리
 
     Examples:
       | provider |
-      | GOOGLE   |
+      | google   |
