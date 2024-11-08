@@ -22,6 +22,7 @@ def test_when_schedule_created_and_with_right_filter_schedule(db):
 def check_response_body(payload: str, response):
     res_schedule_list = response.json()
     schedule_list = json.loads(payload)
+    assert len(res_schedule_list) == len(schedule_list)
     for schedule, res_schedule in zip(schedule_list, res_schedule_list):
         assert schedule["title"] == res_schedule["title"]
         assert schedule["content"] == res_schedule["content"]

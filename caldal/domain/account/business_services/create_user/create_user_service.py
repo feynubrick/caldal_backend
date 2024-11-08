@@ -25,4 +25,7 @@ class CreateUserService(BusinessService[CreateUserServiceInputSchema, User]):
         return user
 
     def _after_run(self, data: CreateUserServiceInputSchema, return_val: User):
-        pass
+        from caldal.domain.schedule.model_services import ScheduleGroupModelService
+
+        user = return_val
+        ScheduleGroupModelService().create_schedule_group(owner=user, is_default=True)

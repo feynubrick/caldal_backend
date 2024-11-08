@@ -45,3 +45,13 @@ def request_to_create_schedule(email: str, payload: str):
         "/api/v1/schedule/schedules", request_body, content_type="application/json"
     )
     return res
+
+
+@when(
+    parsers.parse('이메일이 "{email}"인 사용자가 스케쥴 그룹 목록을 요청합니다.'),
+    target_fixture="response",
+)
+def request_to_get_list_of_schedule_groups(email: str):
+    client = get_user_client(email)
+    res = client.get("/api/v1/schedule/groups")
+    return res

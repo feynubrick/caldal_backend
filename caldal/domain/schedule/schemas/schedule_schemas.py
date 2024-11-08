@@ -1,7 +1,9 @@
-from ninja import Schema
+from django.utils.translation import gettext_lazy as _
+from ninja import Field, Schema
 from ninja.orm import create_schema
 
 from caldal.domain.schedule.models import Schedule
+from caldal.domain.schedule.schemas.schedule_group_schemas import ScheduleGroupOutSchema
 
 _model = Schedule
 _fields = [
@@ -16,6 +18,8 @@ ScheduleBaseSchema = create_schema(
     fields=_fields,
     base_class=Schema,
 )
+
+_fields.append("group")
 ScheduleAllOptionalBaseSchema = create_schema(
     _model,
     fields=_fields,
@@ -25,7 +29,7 @@ ScheduleAllOptionalBaseSchema = create_schema(
 
 
 class CreateScheduleInSchema(ScheduleBaseSchema):
-    pass
+    group_id: int | None = Field(None, description=_("스케쥴 그룹의 ID"))
 
 
 class UpdateScheduleInSchema(ScheduleAllOptionalBaseSchema):
@@ -33,6 +37,5 @@ class UpdateScheduleInSchema(ScheduleAllOptionalBaseSchema):
 
 
 class ScheduleOutSchema(ScheduleBaseSchema):
-    pass
-
     id: int
+    group: ScheduleGroupOutSchema | None = None

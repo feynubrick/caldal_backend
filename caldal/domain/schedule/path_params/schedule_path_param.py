@@ -4,7 +4,7 @@ from ninja import Schema
 from caldal.domain.schedule.models import Schedule
 
 
-class PathParamSchedule(Schema):
+class SchedulePathParam(Schema):
     schedule_id: int
 
     def value(self) -> Schedule:

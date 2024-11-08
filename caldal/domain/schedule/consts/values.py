@@ -1,2 +1,6 @@
+from django.utils.translation import gettext_lazy as _
+
 SCHEDULE_TITLE_MAX_LENGTH = 200
 SCHEDULE_GROUP_NAME_MAX_LENGTH = 100
+DEFAULT_SCHEDULE_GROUP_COLOR_CODE = "#D3BFD9"  # 연보라색
+DEFAULT_SCHEDULE_GROUP_NAME = _("기본")

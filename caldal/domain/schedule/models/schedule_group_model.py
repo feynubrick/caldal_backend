@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 
 from caldal.domain.schedule.consts.values import SCHEDULE_GROUP_NAME_MAX_LENGTH
 from caldal.util.consts import COLOR_HEX_CODE_MAX_LENGTH
-from caldal.util.fields import CreatedAtField
+from caldal.util.fields import CreatedAtField, OrderIndexField
 
 
 class ScheduleGroup(models.Model):
@@ -49,10 +49,12 @@ class ScheduleGroup(models.Model):
             ),
         ],
     )
-    order_index = models.PositiveSmallIntegerField(
-        db_index=True,
+    is_default = models.BooleanField(
+        default=False,
         null=False,
-        default=0,
-        blank=False,
+        blank=True,
+        db_comment="디폴트 여부",
+        help_text=_("디폴트 여부"),
     )
+    order_index = OrderIndexField()
     created_at = CreatedAtField()

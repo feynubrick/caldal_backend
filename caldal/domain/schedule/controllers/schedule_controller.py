@@ -7,9 +7,13 @@ from ninja_extra import ControllerBase, api_controller, permissions, route
 from ninja_extra.exceptions import PermissionDenied
 from ninja_jwt.authentication import JWTAuth
 
-from caldal.domain.paths import PathParamSchedule
+from caldal.domain.schedule.business_services.create_schedule import (
+    CreateScheduleService,
+    CreateScheduleServiceInputSchema,
+)
 from caldal.domain.schedule.filters import ScheduleFilterSchema
 from caldal.domain.schedule.models import Schedule
+from caldal.domain.schedule.path_params import SchedulePathParam
 from caldal.domain.schedule.schemas import (
     CreateScheduleInSchema,
     ScheduleOutSchema,
@@ -35,7 +39,9 @@ class ScheduleController(ControllerBase):
         response={201: ScheduleOutSchema},
     )
     def create_schedule(self, request: HttpRequest, req_body: CreateScheduleInSchema):
-        return Schedule.objects.create(owner=request.user, **req_body.dict())
+        data = req_body.dict()
+        data["owner_id"] = request.user.id
+        return CreateScheduleService().run(CreateScheduleServiceInputSchema(**data))
 
     @route.get(
         "",
@@ -55,7 +61,7 @@ class ScheduleController(ControllerBase):
     def update_schedule(
         self,
         request: HttpRequest,
-        schedule_path_param: Path[PathParamSchedule],
+        schedule_path_param: Path[SchedulePathParam],
         req_body: UpdateScheduleInSchema,
     ):
         schedule = schedule_path_param.value()
@@ -72,7 +78,7 @@ class ScheduleController(ControllerBase):
     def delete_schedule(
         self,
         request: HttpRequest,
-        schedule_path_param: Path[PathParamSchedule],
+        schedule_path_param: Path[SchedulePathParam],
     ):
         schedule = schedule_path_param.value()
         self._validate_owner(request.user, schedule)
