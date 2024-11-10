@@ -3,7 +3,7 @@ import json
 from pytest_bdd import parsers, then, when
 
 from caldal.domain.schedule.models import Schedule
-from caldal.util.test import get_user_client
+from caldal.util.test import get_user_client, is_same_time
 
 
 @when(
@@ -34,3 +34,16 @@ def when_request_to_update_a_schedule(email: str, payload: str):
 def check_schedule_exists(email: str, count_str: str, payload: str):
     data = json.loads(payload)
     assert Schedule.objects.filter(**data, owner__email=email).count() == int(count_str)
+
+
+@then(parsers.parse("응답된 일정 데이터는 다음과 같습니다.\n{payload}"))
+def check_schedule_response_data(payload: str, response):
+    res_schedule = response.json()
+    schedule = json.loads(payload)
+
+    assert isinstance(res_schedule["id"], int)
+    assert res_schedule["title"] == schedule["title"]
+    assert res_schedule["content"] == schedule["content"]
+    assert is_same_time(res_schedule["start_time"], schedule["start_time"])
+    assert is_same_time(res_schedule["end_time"], schedule["end_time"])
+    assert res_schedule["is_all_day"] == schedule["is_all_day"]

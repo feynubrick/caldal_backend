@@ -11,6 +11,7 @@ _fields = [
     "content",
     "start_time",
     "end_time",
+    "is_all_day",
 ]
 
 ScheduleBaseSchema = create_schema(

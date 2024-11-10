@@ -14,4 +14,5 @@ class CreateScheduleServiceInputSchema(ModelSchema):
             "content",
             "start_time",
             "end_time",
+            "is_all_day",
         ]

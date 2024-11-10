@@ -70,7 +70,7 @@ class ScheduleController(ControllerBase):
         schedule = schedule_path_param.value()
         self._validate_owner(request.user, schedule)
         update_data = req_body.dict(exclude_unset=True)  # for partial update
-        ScheduleModelService().update(instance_id=schedule.id, **update_data)
+        ScheduleModelService(schedule).update(**update_data)
         schedule.refresh_from_db()
         return schedule
 

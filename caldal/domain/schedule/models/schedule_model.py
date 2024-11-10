@@ -61,4 +61,11 @@ class Schedule(models.Model):
         db_comment="종료 시간",
         help_text=_("종료 시간"),
     )
+    is_all_day = models.BooleanField(
+        null=False,
+        default=False,
+        blank=False,
+        db_comment="종일 이벤트인지 나타내는 값. 종일 이벤트의 경우 end_time이 null.",
+        help_text=_("종일 이벤트인지 나타내는 값"),
+    )
     created_at = CreatedAtField()
