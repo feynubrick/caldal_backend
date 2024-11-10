@@ -12,6 +12,7 @@ from caldal.domain.schedule.business_services.create_schedule import (
     CreateScheduleServiceInputSchema,
 )
 from caldal.domain.schedule.filters import ScheduleFilterSchema
+from caldal.domain.schedule.model_services import ScheduleModelService
 from caldal.domain.schedule.models import Schedule
 from caldal.domain.schedule.path_params import SchedulePathParam
 from caldal.domain.schedule.schemas import (
@@ -52,7 +53,9 @@ class ScheduleController(ControllerBase):
         request: HttpRequest,
         filters: ScheduleFilterSchema = Query(...),
     ):
-        return filters.filter(Schedule.objects.filter(owner=request.user))
+        return filters.filter(
+            ScheduleModelService().get_list_of_schedule(owner=request.user)
+        )
 
     @route.patch(
         "/{schedule_id}",
@@ -66,8 +69,8 @@ class ScheduleController(ControllerBase):
     ):
         schedule = schedule_path_param.value()
         self._validate_owner(request.user, schedule)
-        update_data = req_body.dict(exclude_unset=True)
-        Schedule.objects.filter(id=schedule.id).update(**update_data)
+        update_data = req_body.dict(exclude_unset=True)  # for partial update
+        ScheduleModelService().update(instance_id=schedule.id, **update_data)
         schedule.refresh_from_db()
         return schedule
 
