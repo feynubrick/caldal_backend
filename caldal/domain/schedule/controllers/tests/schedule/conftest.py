@@ -47,3 +47,4 @@ def check_schedule_response_data(payload: str, response):
     assert is_same_time(res_schedule["start_time"], schedule["start_time"])
     assert is_same_time(res_schedule["end_time"], schedule["end_time"])
     assert res_schedule["is_all_day"] == schedule["is_all_day"]
+    assert res_schedule["timezone"] == schedule["timezone"]

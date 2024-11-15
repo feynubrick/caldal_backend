@@ -23,7 +23,8 @@ Feature: 스케쥴 생성하기
         "content": "Python 공부",
         "start_time": "2024-10-01T00:00:00+09:00",
         "end_time": "2024-10-01T01:00:00+09:00",
-        "is_all_day": false
+        "is_all_day": false,
+        "timezone": "Asia/Seoul"
       }
       """
     And 다음 조건과 일치하는 이메일이 "a@gmail.com"인 사용자의 일정이 1개 존재합니다.
@@ -34,6 +35,42 @@ Feature: 스케쥴 생성하기
         "start_time": "2024-10-01T00:00:00+09:00",
         "end_time": "2024-10-01T01:00:00+09:00",
         "is_all_day": false
+      }
+      """
+
+  Scenario: 사용자는 한국이 아닌 다른 시간대에서도 일정을 생성할 수 있다.
+    When 이메일이 "a@gmail.com"인 사용자가 다음과 같이 일정 생성을 요청합니다.
+      """
+      {
+        "title": "개발 공부",
+        "content": "Python 공부",
+        "start_time": "2024-10-01T00:00:00+00:00",
+        "end_time": "2024-10-01T01:00:00+00:00",
+        "is_all_day": false,
+        "timezone": "Europe/London"
+      }
+      """
+    Then 서버의 응답 상태코드는 201입니다.
+    And 응답된 일정 데이터는 다음과 같습니다.
+      """
+      {
+        "title": "개발 공부",
+        "content": "Python 공부",
+        "start_time": "2024-10-01T00:00:00+00:00",
+        "end_time": "2024-10-01T01:00:00+00:00",
+        "is_all_day": false,
+        "timezone": "Europe/London"
+      }
+      """
+    And 다음 조건과 일치하는 이메일이 "a@gmail.com"인 사용자의 일정이 1개 존재합니다.
+      """
+      {
+        "title": "개발 공부",
+        "content": "Python 공부",
+        "start_time": "2024-10-01T00:00:00+00:00",
+        "end_time": "2024-10-01T01:00:00+00:00",
+        "is_all_day": false,
+        "timezone": "Europe/London"
       }
       """
 
@@ -55,7 +92,8 @@ Feature: 스케쥴 생성하기
         "content": null,
         "start_time": "2024-10-01T00:00:00+09:00",
         "end_time": "2024-10-02T00:00:00+09:00",
-        "is_all_day": true
+        "is_all_day": true,
+        "timezone": "Asia/Seoul"
       }
       """
     And 다음 조건과 일치하는 이메일이 "a@gmail.com"인 사용자의 일정이 1개 존재합니다.
@@ -65,7 +103,8 @@ Feature: 스케쥴 생성하기
         "content": null,
         "start_time": "2024-10-01T00:00:00+09:00",
         "end_time": "2024-10-02T00:00:00+09:00",
-        "is_all_day": true
+        "is_all_day": true,
+        "timezone": "Asia/Seoul"
       }
       """
 

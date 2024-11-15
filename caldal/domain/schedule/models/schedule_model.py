@@ -1,7 +1,11 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from caldal.domain.schedule.consts.values import SCHEDULE_TITLE_MAX_LENGTH
+from caldal.domain.schedule.consts.values import (
+    DEFAULT_TIMEZONE,
+    SCHEDULE_TIMEZONE_MAX_LENGTH,
+    SCHEDULE_TITLE_MAX_LENGTH,
+)
 from caldal.util.fields import CreatedAtField
 
 
@@ -65,7 +69,15 @@ class Schedule(models.Model):
         null=False,
         default=False,
         blank=False,
-        db_comment="종일 이벤트인지 나타내는 값. 종일 이벤트의 경우 end_time이 null.",
+        db_comment="종일 이벤트인지 나타내는 값",
         help_text=_("종일 이벤트인지 나타내는 값"),
+    )
+    timezone = models.CharField(
+        max_length=SCHEDULE_TIMEZONE_MAX_LENGTH,
+        null=False,
+        blank=False,
+        default=DEFAULT_TIMEZONE,
+        db_comment="시간대. ex) Asia/Seoul",
+        help_text=_("시간대. ex) Asia/Seoul"),
     )
     created_at = CreatedAtField()

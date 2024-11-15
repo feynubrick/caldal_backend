@@ -26,4 +26,5 @@ class CreateScheduleService(
             start_time=data.start_time,
             end_time=data.end_time,
             is_all_day=data.is_all_day,
+            timezone=data.timezone,
         )
