@@ -27,7 +27,9 @@ class ModelService(Generic[T], ABC):
 
     def update(self, **kwargs):
         self._validate_update(**kwargs)
-        return self.get_queryset().filter(id=self._instance.id).update(**kwargs)
+        self.get_queryset().filter(id=self._instance.id).update(**kwargs)
+        self._instance.refresh_from_db()
+        return self._instance
 
     def delete(self):
         self._validate_delete()

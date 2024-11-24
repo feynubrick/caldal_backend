@@ -60,9 +60,8 @@ class ScheduleGroupController(ControllerBase):
     ):
         schedule_group = group_path_param.value()
         self._validate_owner(request.user, schedule_group)
-        return ScheduleGroup.objects.filter(id=schedule_group.id).update(
-            **req_body.dict()
-        )
+        instance = ScheduleGroupModelService(schedule_group).update(**req_body.dict())
+        return instance
 
     @route.delete("/{group_id}", response={204: None})
     def delete_group(
@@ -72,7 +71,7 @@ class ScheduleGroupController(ControllerBase):
     ):
         schedule_group = group_path_param.value()
         self._validate_owner(request.user, schedule_group)
-        schedule_group.delete()
+        ScheduleGroupModelService(schedule_group).delete()
         return 204, None
 
     def _validate_owner(self, user: User, schedule_group: ScheduleGroup):

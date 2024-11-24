@@ -49,7 +49,7 @@ class ScheduleModelService(ModelService):
         end_time: datetime,
         is_all_day: bool,
         timezone: str,
-        **kwargs
+        **kwargs,
     ):
         self._validate_time(start_time, end_time, is_all_day, timezone)
 
@@ -57,7 +57,8 @@ class ScheduleModelService(ModelService):
         start_time = kwargs.get("start_time", self._instance.start_time)
         end_time = kwargs.get("end_time", self._instance.end_time)
         is_all_day = kwargs.get("is_all_day", self._instance.is_all_day)
-        self._validate_time(start_time, end_time, is_all_day)
+        timezone = kwargs.get("timezone", self._instance.timezone)
+        self._validate_time(start_time, end_time, is_all_day, timezone)
 
     def _validate_all_day_event_time(
         self, start_time: datetime, end_time: datetime, timezone_str: str

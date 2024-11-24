@@ -25,7 +25,6 @@ ScheduleBaseSchema = create_schema(
     base_class=Schema,
 )
 
-_fields.append("group")
 ScheduleAllOptionalBaseSchema = create_schema(
     _model,
     fields=_fields,
@@ -47,7 +46,7 @@ class CreateScheduleInSchema(ScheduleBaseSchema):
 
 
 class UpdateScheduleInSchema(ScheduleAllOptionalBaseSchema):
-    pass
+    group_id: int | None = None
 
 
 class ScheduleOutSchema(ScheduleBaseSchema):

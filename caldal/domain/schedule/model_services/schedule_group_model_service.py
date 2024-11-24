@@ -1,4 +1,5 @@
 from django.db.models import Max
+from ninja_extra.exceptions import ValidationError
 
 from caldal.domain.account.models import User
 from caldal.domain.schedule.consts.values import (
@@ -40,3 +41,7 @@ class ScheduleGroupModelService(ModelService):
 
     def get_default(self, owner: User) -> ScheduleGroup:
         return self.get(owner=owner, is_default=True)
+
+    def _validate_delete(self, **kwargs):
+        if self._instance.schedules.exists():
+            raise ValidationError("스케쥴이 등록된 그룹은 제거할 수 없습니다.")
