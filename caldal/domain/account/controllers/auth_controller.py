@@ -1,3 +1,5 @@
+import json
+
 from ninja_extra import ControllerBase, api_controller, route
 from ninja_jwt.schema import TokenObtainPairOutputSchema, TokenRefreshInputSchema
 
@@ -68,7 +70,10 @@ class AuthController(ControllerBase):
         "/{provider}",
         response={200: str},
     )
-    def handle_oauth_redirect_uri(self, request):
+    def handle_oauth_redirect_uri(self, request, provider: OAuthProviderEnum):
+        print(f"provider: {provider}")
+        payload = json.loads(request.POST.get("payload", "{}"))
+        print(f"payload: \n{json.dumps(payload, indent=4)}")
         return 200, "OK"
 
     @route.post(
