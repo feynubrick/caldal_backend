@@ -6,7 +6,7 @@ from caldal.domain.account.interfaces.oauth_interface import OAuthProvider
 from caldal.domain.account.schemas.auth_schemas import IdTokenInfoSchema
 
 
-class GoogleSocialOAuthProvider(OAuthProvider):
+class GoogleOAuthProvider(OAuthProvider):
     def verify_oauth_token(self, token: str) -> IdTokenInfoSchema:
         parsed_token = id_token.verify_oauth2_token(
             id_token=token,

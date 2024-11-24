@@ -1,7 +1,11 @@
 from caldal.domain.account.const.enums import OAuthProviderEnum
-from caldal.domain.external.google.oauth_provider import GoogleSocialOAuthProvider
+from caldal.domain.external.apple.apple_oauth_provider import AppleOAuthProvider
+from caldal.domain.external.google.google_oauth_provider import GoogleOAuthProvider
 
-_provider_map = {OAuthProviderEnum.GOOGLE: GoogleSocialOAuthProvider}
+_provider_map = {
+    OAuthProviderEnum.GOOGLE: GoogleOAuthProvider,
+    OAuthProviderEnum.APPLE: AppleOAuthProvider,
+}
 
 
 class OAuthService:

@@ -129,3 +129,8 @@ NINJA_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
+
+APPLE_CLIENT_ID = os.environ["APPLE_CLIENT_ID"]
+APPLE_TEAM_ID = os.environ["APPLE_TEAM_ID"]
+APPLE_PRIVATE_KEY = os.environ["APPLE_PRIVATE_KEY"]
+APPLE_OAUTH_KEY_ID = os.environ["APPLE_OAUTH_KEY_ID"]

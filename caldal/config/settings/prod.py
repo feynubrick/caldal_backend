@@ -16,3 +16,4 @@ NINJA_JWT = {
 
 GOOGLE_OAUTH_REDIRECT_URI = "https://home.feynubrick.link/auth/google"
 GOOGLE_OAUTH_CLIENT_ID = os.environ["GOOGLE_OAUTH_CLIENT_ID"]
+APPLE_OAUTH_REDIRECT_URI = "https://home.feynubrick.link/auth/apple"

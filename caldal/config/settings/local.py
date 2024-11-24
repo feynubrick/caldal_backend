@@ -10,3 +10,4 @@ NINJA_JWT = {
 
 GOOGLE_OAUTH_REDIRECT_URI = "https://localhost:8000/auth/google"
 GOOGLE_OAUTH_CLIENT_ID = os.environ["GOOGLE_OAUTH_CLIENT_ID"]
+APPLE_OAUTH_REDIRECT_URI = "https://localhost:8000/auth/apple"

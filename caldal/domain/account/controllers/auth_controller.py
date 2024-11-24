@@ -64,6 +64,13 @@ class AuthController(ControllerBase):
             "access": access_token,
         }
 
+    @route.get(
+        "/{provider}",
+        response={200: str},
+    )
+    def handle_oauth_redirect_uri(self):
+        return 200, "OK"
+
     @route.post(
         "/refresh",
         response={200: TokenRefreshInputSchema.get_response_schema()},
