@@ -134,3 +134,5 @@ APPLE_CLIENT_ID = os.environ["APPLE_CLIENT_ID"]
 APPLE_TEAM_ID = os.environ["APPLE_TEAM_ID"]
 APPLE_PRIVATE_KEY = os.environ["APPLE_PRIVATE_KEY"]
 APPLE_OAUTH_KEY_ID = os.environ["APPLE_OAUTH_KEY_ID"]
+
+CLIENT_APP_ID = "com.feynubrick.caldal"

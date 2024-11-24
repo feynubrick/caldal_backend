@@ -68,23 +68,6 @@ class AuthController(ControllerBase):
         }
 
     @route.post(
-        "/{provider}/callback",
-        response={200: str},
-    )
-    def handle_oauth_redirect_uri(self, request, provider: OAuthProviderEnum):
-        print(f"provider: {provider}")
-        payload = json.loads(request.POST.get("payload", "{}"))
-        print(f"payload: \n{json.dumps(payload, indent=4)}")
-        html_response = """
-            <html>
-            <script>
-                window.close();
-            </script>
-            </html>
-            """
-        return HttpResponse(content=html_response, media_type="text/html")
-
-    @route.post(
         "/refresh",
         response={200: TokenRefreshInputSchema.get_response_schema()},
     )
