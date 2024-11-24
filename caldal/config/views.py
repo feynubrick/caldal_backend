@@ -17,17 +17,7 @@ def oauth_callback(request, provider):
         print(f"POST: {request.POST}")
 
         if request.method == "POST":
-            # 요청 본문이 JSON인 경우
-            if request.headers.get("content-type") == "application/json":
-                try:
-                    data = json.loads(request.body)
-                except json.JSONDecodeError:
-                    print("Failed to parse JSON body")
-                    data = {}
-            # 일반 POST 데이터인 경우
-            else:
-                data = request.POST.dict()
-
+            data = request.POST.dict()
             print(f"Processed data: {data}")
 
             # POST 데이터를 URLSearchParams 형식으로 변환
@@ -42,17 +32,32 @@ def oauth_callback(request, provider):
 
             print(f"Redirecting to {redirect_uri}")
 
-            # 307 Temporary Redirect로 리다이렉트
-            return HttpResponseRedirect(redirect_uri, status=307)
+            # HTML과 JavaScript를 사용하여 리다이렉트
+            html_content = f"""
+            <html>
+            <head>
+                <title>Redirecting...</title>
+            </head>
+            <body>
+                <script>
+                    window.location.replace("{redirect_uri}");
+                </script>
+                <p>리다이렉트 중입니다...</p>
+            </body>
+            </html>
+            """
 
-        # GET 요청 처리 (디버깅용)
-        elif request.method == "GET":
-            return HttpResponse(
-                "OAuth callback endpoint is working. "
-                "This endpoint expects POST requests.",
-                content_type="text/plain",
-            )
+            return HttpResponse(html_content)
 
     except Exception as e:
         print(f"Error processing request: {str(e)}")
-        return HttpResponseBadRequest(f"Error processing request: {str(e)}")
+        return HttpResponse(
+            f"""
+            <html>
+            <body>
+                <p>Error: {str(e)}</p>
+            </body>
+            </html>
+            """,
+            status=400,
+        )
