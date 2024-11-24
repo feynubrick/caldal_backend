@@ -66,8 +66,8 @@ class AuthController(ControllerBase):
             "access": access_token,
         }
 
-    @route.get(
-        "/{provider}",
+    @route.post(
+        "/{provider}/callback",
         response={200: str},
     )
     def handle_oauth_redirect_uri(self, request, provider: OAuthProviderEnum):
