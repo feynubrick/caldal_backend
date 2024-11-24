@@ -68,7 +68,7 @@ class AuthController(ControllerBase):
         "/{provider}",
         response={200: str},
     )
-    def handle_oauth_redirect_uri(self):
+    def handle_oauth_redirect_uri(self, request):
         return 200, "OK"
 
     @route.post(
