@@ -10,8 +10,10 @@ ALLOWED_HOSTS = [
 ]
 
 NINJA_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+    # "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
+    # "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=30),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=60),
 }
 
 GOOGLE_OAUTH_REDIRECT_URI = "https://home.feynubrick.link/auth/google"
