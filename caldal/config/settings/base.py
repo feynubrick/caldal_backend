@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import base64
 import os
 from datetime import timedelta
 from pathlib import Path
@@ -132,5 +133,8 @@ NINJA_JWT = {
 
 APPLE_CLIENT_ID = os.environ["APPLE_CLIENT_ID"]
 APPLE_TEAM_ID = os.environ["APPLE_TEAM_ID"]
-APPLE_PRIVATE_KEY = os.environ["APPLE_PRIVATE_KEY"]
+APPLE_PRIVATE_KEY = base64.b64decode(os.environ["APPLE_PRIVATE_KEY"]).decode("utf-8")
 APPLE_OAUTH_KEY_ID = os.environ["APPLE_OAUTH_KEY_ID"]
+APPLE_OAUTH_REDIRECT_URI = os.environ["APPLE_OAUTH_REDIRECT_URI"]
+
+CLIENT_APP_ID = "com.feynubrick.caldal"

@@ -1,3 +1,6 @@
+import json
+
+from django.http import HttpResponse
 from ninja_extra import ControllerBase, api_controller, route
 from ninja_jwt.schema import TokenObtainPairOutputSchema, TokenRefreshInputSchema
 
@@ -29,7 +32,7 @@ class AuthController(ControllerBase):
         provider: OAuthProviderEnum,
         req_body: ProcessOAuthInSchema,
     ):
-        id_info = OAuthService(provider).verify_token(req_body.id_token)
+        id_info = OAuthService(provider).verify_token(req_body.token)
         identifier = id_info.sub
         email = id_info.email
 
@@ -63,13 +66,6 @@ class AuthController(ControllerBase):
             "refresh": refresh_token,
             "access": access_token,
         }
-
-    @route.get(
-        "/{provider}",
-        response={200: str},
-    )
-    def handle_oauth_redirect_uri(self, request):
-        return 200, "OK"
 
     @route.post(
         "/refresh",
