@@ -4,6 +4,7 @@ from django.conf import settings
 from django.utils import timezone
 from jwt.algorithms import RSAAlgorithm
 
+from caldal.domain.account.const.enums import PlatformEnum
 from caldal.domain.account.interfaces.oauth_interface import OAuthProvider
 from caldal.domain.account.schemas import IdTokenInfoSchema
 
@@ -23,7 +24,11 @@ class AppleOAuthProvider(OAuthProvider):
             id_token,
             RSAAlgorithm.from_jwk(public_key),
             algorithms=["RS256"],
-            audience=settings.APPLE_CLIENT_ID,
+            audience=(
+                settings.APPLE_CLIENT_ID
+                if self.platform == PlatformEnum.IOS
+                else settings.APPLE_SIGN_IN_SERVICE_ID
+            ),
         )
         return decoded_token
 

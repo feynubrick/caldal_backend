@@ -1,4 +1,4 @@
-from caldal.domain.account.const.enums import OAuthProviderEnum
+from caldal.domain.account.const.enums import OAuthProviderEnum, PlatformEnum
 from caldal.domain.external.apple.apple_oauth_provider import AppleOAuthProvider
 from caldal.domain.external.google.google_oauth_provider import GoogleOAuthProvider
 
@@ -9,11 +9,12 @@ _provider_map = {
 
 
 class OAuthService:
-    def __init__(self, provider_name: OAuthProviderEnum):
+    def __init__(self, provider_name: OAuthProviderEnum, platform: PlatformEnum):
         self.provider = self.get_provider(provider_name)
+        self.platform = platform
 
     def verify_token(self, token: str):
         return self.provider.verify_oauth_token(token)
 
     def get_provider(self, provider_name: OAuthProviderEnum):
-        return _provider_map[provider_name]()
+        return _provider_map[provider_name](self.platform)

@@ -32,7 +32,7 @@ class AuthController(ControllerBase):
         provider: OAuthProviderEnum,
         req_body: ProcessOAuthInSchema,
     ):
-        id_info = OAuthService(provider).verify_token(req_body.token)
+        id_info = OAuthService(provider, req_body.platform).verify_token(req_body.token)
         identifier = id_info.sub
         email = id_info.email
 

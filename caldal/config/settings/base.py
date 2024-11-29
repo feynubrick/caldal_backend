@@ -131,7 +131,8 @@ NINJA_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
 
-APPLE_CLIENT_ID = os.environ["APPLE_CLIENT_ID"]
+APPLE_CLIENT_ID = "com.feynubrick.caldal"
+APPLE_SIGN_IN_SERVICE_ID = "com.feynubrick.logincaldal"
 APPLE_TEAM_ID = os.environ["APPLE_TEAM_ID"]
 APPLE_PRIVATE_KEY = base64.b64decode(os.environ["APPLE_PRIVATE_KEY"]).decode("utf-8")
 APPLE_OAUTH_KEY_ID = os.environ["APPLE_OAUTH_KEY_ID"]
