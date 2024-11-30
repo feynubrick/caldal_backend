@@ -10,8 +10,8 @@ _provider_map = {
 
 class OAuthService:
     def __init__(self, provider_name: OAuthProviderEnum, platform: PlatformEnum):
-        self.provider = self.get_provider(provider_name)
         self.platform = platform
+        self.provider = self.get_provider(provider_name)
 
     def verify_token(self, token: str):
         return self.provider.verify_oauth_token(token)
