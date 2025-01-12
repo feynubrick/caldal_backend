@@ -5,6 +5,7 @@
 *.sqlite3
 *.isorted
 *.env
+!template.env
 static/
 __pycache__/
 apple.p8
