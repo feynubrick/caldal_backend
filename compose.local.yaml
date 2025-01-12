@@ -3,12 +3,17 @@ services:
     image: postgres:17-bookworm
     volumes:
       - db_data:/var/lib/postgresql/data
+      - ./postgres/config/postgresql.conf:/etc/postgresql/postgresql.conf
+      - ./postgres/init:/docker-entrypoint-initdb.d/
+      - ./postgres/config/pg_hba.conf:/etc/postgresql/pg_hba.conf
+    command: postgres -c 'config_file=/etc/postgresql/postgresql.conf'
     env_file:
       - local.env
     environment:
       POSTGRES_DB: ${DATABASE_NAME}
       POSTGRES_USER: ${DATABASE_USER}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POWERSYNC_PASSWORD: ${POWERSYNC_PASSWORD}
     ports:
       - "5440:5432"
   web:

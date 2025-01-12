@@ -1,6 +1,6 @@
 FROM python:3.12.7-bookworm
 
-RUN apt update -y && apt install -y libpq-dev python3-dev nginx build-essential
+RUN apt update -y && apt install -y libpq-dev python3-dev nginx build-essential postgresql-client
 
 WORKDIR /app
 
