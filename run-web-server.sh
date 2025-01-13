@@ -5,11 +5,11 @@ if [ "$RUN_ENV" = "prod" ]; then
   echo "Starting nginx with deploy/$RUN_ENV.nginx..."
   service nginx start
   echo "nginx started!"
-
-  echo "Running migrate..."
-  python manage.py migrate --no-input
-  echo "migrate finished!"
 fi
+
+echo "Running migrate..."
+python manage.py migrate --no-input
+echo "migrate finished!"
 
 echo "Running collectstatic..."
 python manage.py collectstatic --no-input

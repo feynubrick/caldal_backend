@@ -1,0 +1,51 @@
+# Settings for source database replication
+replication:
+  # Specify database connection details
+  # Note only 1 connection is currently supported
+  # Multiple connection support is on the roadmap
+  connections:
+    - type: postgresql
+      # The PowerSync server container can access the Postgres DB via the DB's service name.
+      # In this case the hostname is pg-db
+
+      hostname: !env PS_SOURCE_DB_HOST # From the Docker Compose service name
+      port: !env PS_SOURCE_DB_PORT
+      database: !env PS_SOURCE_DB_DATABASE
+      username: !env PS_SOURCE_DB_USERNAME
+      password: !env PS_SOURCE_DB_PASSWORD
+
+      # SSL settings
+      sslmode: disable # 'verify-full' (default) or 'verify-ca' or 'disable'
+      # 'disable' is OK for local/private networks, not for public networks
+
+# Connection settings for sync bucket storage
+storage:
+  type: mongodb
+  uri: mongodb://powersync_storage:27017/powersync_demo?authSource=admin
+  username: !env PS_STORAGE_USERNAME
+  password: !env PS_STORAGE_PASSWORD
+
+# The port which the PowerSync API server will listen on
+port: 80
+
+# Specify sync rules
+sync_rules:
+  path: /config/sync_rules.yaml
+
+# Settings for client authentication
+client_auth:
+  # Enable this if using Supabase Auth
+  # supabase: true
+  # supabase_jwt_secret: your-secret
+
+  # JWKS URIs can be specified here.
+  jwks_uri: http://demo-backend:6060/api/auth/keys
+
+  # JWKS audience
+  audience: ['powersync-dev', 'powersync']
+
+  # Settings for telemetry reporting
+  # See https://docs.powersync.com/self-hosting/telemetry
+  telemetry:
+    # Opt out of reporting anonymized usage metrics to PowerSync telemetry service
+    disable_telemetry_sharing: false
