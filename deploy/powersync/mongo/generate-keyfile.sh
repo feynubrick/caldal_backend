@@ -2,7 +2,7 @@
 
 # Directory for MongoDB keyfile
 KEYFILE_DIR="./deploy/powersync/mongo"
-KEYFILE_PATH="$KEYFILE_DIR/keyfile"
+KEYFILE_PATH="$KEYFILE_DIR/keyfile.txt"
 
 # Create directory if it doesn't exist
 mkdir -p $KEYFILE_DIR
