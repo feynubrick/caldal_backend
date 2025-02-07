@@ -1,2 +1,2 @@
-from .schedule_group_model_service import ScheduleGroupModelService
-from .schedule_model_service import ScheduleModelService
+from .event_group_model_service import EventGroupModelService
+from .event_model_service import EventModelService

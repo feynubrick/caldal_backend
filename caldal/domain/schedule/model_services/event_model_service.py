@@ -2,23 +2,14 @@ from datetime import datetime
 
 from ninja.errors import HttpError
 
-from caldal.domain.account.models import User
-from caldal.domain.schedule.models import Schedule
+from caldal.domain.schedule.models import Event
 from caldal.util.consts import DAY_TO_SECONDS
 from caldal.util.datetime import compare_timezone_str_to_datetime
 from caldal.util.services import ModelService
 
 
-class ScheduleModelService(ModelService):
-    _model = Schedule
-
-    def get_list_of_schedule(self, owner: User):
-        return (
-            self.get_queryset()
-            .filter(owner=owner)
-            .order_by("start_time")
-            .prefetch_related("group")
-        )
+class EventModelService(ModelService):
+    _model = Event
 
     def _validate_time(
         self,

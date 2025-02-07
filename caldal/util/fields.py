@@ -12,6 +12,16 @@ class CreatedAtField(models.DateTimeField):
         super().__init__(*args, **kwargs)
 
 
+class UpdatedAtField(models.DateTimeField):
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault("auto_now", True)
+        kwargs.setdefault("null", True)
+        kwargs.setdefault("blank", True)
+        kwargs.setdefault("db_comment", "편집 시간")
+        kwargs.setdefault("help_text", _("편집 시간"))
+        super().__init__(*args, **kwargs)
+
+
 class OrderIndexField(models.PositiveSmallIntegerField):
     def __init__(self, *args, **kwargs):
         kwargs.setdefault("db_index", True)

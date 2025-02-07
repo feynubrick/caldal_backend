@@ -1,27 +1,43 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from caldal.domain.schedule.consts.enums import EventTypeEnum
 from caldal.domain.schedule.consts.values import (
-    DEFAULT_TIMEZONE,
-    SCHEDULE_TIMEZONE_MAX_LENGTH,
-    SCHEDULE_TITLE_MAX_LENGTH,
+    EVENT_TITLE_MAX_LENGTH,
+    EVENT_TYPE_MAX_LENGTH,
+    TIMEZONE_MAX_LENGTH,
 )
-from caldal.util.fields import CreatedAtField
+from caldal.util.fields import CreatedAtField, UpdatedAtField
+
+UserModel = get_user_model()
 
 
-class Schedule(models.Model):
+class Event(models.Model):
     class Meta:
-        db_table = "schedule_schedule"
-        db_table_comment = "Schedules"
-        app_label = "schedule"
-        verbose_name = "Schedule"
-        verbose_name_plural = "Schedules"
-        ordering = ["owner", "start_time"]
+        db_table = "schedule_event"
+        db_table_comment = "이벤트"
+        ordering = [
+            "owner",
+            "type",
+            "start_time",
+        ]
+        unique_together = [["owner", "uuid"]]
 
+    uuid = models.UUIDField()
+    type = models.CharField(
+        max_length=EVENT_TYPE_MAX_LENGTH,
+        choices=EventTypeEnum.choices,
+        null=False,
+        default=EventTypeEnum.RANGED,
+        blank=False,
+        db_comment="이벤트 유형: RANGED(범위), ALL_DAY(하루종일)",
+        help_text=_("이벤트 유형: RANGED(범위), ALL_DAY(하루종일)"),
+    )
     owner = models.ForeignKey(
-        "account.User",
+        UserModel,
         on_delete=models.CASCADE,
-        related_name="schedules",
+        related_name="events",
         blank=False,
         null=False,
         verbose_name=_("Owner"),
@@ -29,9 +45,9 @@ class Schedule(models.Model):
         help_text=_("스케쥴 소유자"),
     )
     group = models.ForeignKey(
-        "schedule.ScheduleGroup",
+        "schedule.EventGroup",
         on_delete=models.PROTECT,
-        related_name="schedules",
+        related_name="events",
         blank=False,
         null=False,
         verbose_name=_("Group"),
@@ -39,7 +55,7 @@ class Schedule(models.Model):
         help_text=_("스케쥴 그룹"),
     )
     title = models.CharField(
-        max_length=SCHEDULE_TITLE_MAX_LENGTH,
+        max_length=EVENT_TITLE_MAX_LENGTH,
         null=False,
         blank=False,
         db_comment="스케쥴 제목",
@@ -65,19 +81,13 @@ class Schedule(models.Model):
         db_comment="종료 시간",
         help_text=_("종료 시간"),
     )
-    is_all_day = models.BooleanField(
-        null=False,
-        default=False,
-        blank=False,
-        db_comment="종일 이벤트인지 나타내는 값",
-        help_text=_("종일 이벤트인지 나타내는 값"),
-    )
     timezone = models.CharField(
-        max_length=SCHEDULE_TIMEZONE_MAX_LENGTH,
+        max_length=TIMEZONE_MAX_LENGTH,
+        default="Asia/Seoul",
         null=False,
-        blank=False,
-        default=DEFAULT_TIMEZONE,
+        blank=True,
         db_comment="시간대. ex) Asia/Seoul",
         help_text=_("시간대. ex) Asia/Seoul"),
     )
     created_at = CreatedAtField()
+    updated_at = UpdatedAtField(auto_now=False)

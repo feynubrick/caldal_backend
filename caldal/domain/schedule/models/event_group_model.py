@@ -1,28 +1,30 @@
+from django.contrib.auth import get_user_model
 from django.core.validators import RegexValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from caldal.domain.schedule.consts.values import SCHEDULE_GROUP_NAME_MAX_LENGTH
+from caldal.domain.schedule.consts.values import EVENT_GROUP_NAME_MAX_LENGTH
 from caldal.util.consts import COLOR_HEX_CODE_MAX_LENGTH
-from caldal.util.fields import CreatedAtField, OrderIndexField
+from caldal.util.fields import CreatedAtField, OrderIndexField, UpdatedAtField
+
+UserModel = get_user_model()
 
 
-class ScheduleGroup(models.Model):
+class EventGroup(models.Model):
     class Meta:
-        db_table = "schedule_group"
-        db_table_comment = "스케쥴 그룹"
-        app_label = "schedule"
-        verbose_name = "ScheduleGroup"
-        verbose_name_plural = "ScheduleGroups"
+        db_table = "schedule_event_group"
+        db_table_comment = "이벤트 그룹"
         ordering = [
             "owner",
             "order_index",
         ]
+        unique_together = [["owner", "uuid"]]
 
+    uuid = models.UUIDField()
     owner = models.ForeignKey(
-        "account.User",
+        UserModel,
         on_delete=models.CASCADE,
-        related_name="schedule_groups",
+        related_name="event_groups",
         blank=False,
         null=False,
         verbose_name=_("Owner"),
@@ -30,7 +32,7 @@ class ScheduleGroup(models.Model):
         help_text=_("스케쥴 그룹 소유자"),
     )
     name = models.CharField(
-        max_length=SCHEDULE_GROUP_NAME_MAX_LENGTH,
+        max_length=EVENT_GROUP_NAME_MAX_LENGTH,
         null=False,
         blank=False,
         db_comment="스케쥴 그룹 이름",
@@ -49,12 +51,9 @@ class ScheduleGroup(models.Model):
             ),
         ],
     )
-    is_default = models.BooleanField(
-        default=False,
-        null=False,
-        blank=True,
-        db_comment="디폴트 여부",
-        help_text=_("디폴트 여부"),
+    order_index = OrderIndexField(
+        db_comment="순서를 정할 때 쓰는 값. 0이면 디폴트",
+        help_text=_("순서를 정할 때 쓰는 값. 0이면 디폴트"),
     )
-    order_index = OrderIndexField()
     created_at = CreatedAtField()
+    updated_at = UpdatedAtField(auto_now=False)
