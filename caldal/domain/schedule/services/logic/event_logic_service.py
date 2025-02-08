@@ -3,14 +3,14 @@ from typing import Any
 
 from django.contrib.auth import get_user_model
 
-from caldal.domain.schedule.model_services import EventGroupModelService
-from caldal.domain.schedule.model_services.event_model_service import EventModelService
+from caldal.domain.schedule.services.model import EventGroupModelService
+from caldal.domain.schedule.services.model.event_model_service import EventModelService
 from caldal.domain.schedule.models import Event
 
 User = get_user_model()
 
 
-class EventController:
+class EventLogicService:
     def bulk_create(
         self,
         requester: User,

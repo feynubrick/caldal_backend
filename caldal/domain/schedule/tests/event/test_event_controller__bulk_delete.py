@@ -1,7 +1,7 @@
 import pytest
 from faker import Faker
 
-from caldal.domain.schedule.controllers.event_controller import EventController
+from caldal.domain.schedule.services.logic.event_logic_service import EventLogicService
 from caldal.domain.schedule.models import Event
 from caldal.util.test.factories.schedule.event_factory import EventFactory
 
@@ -16,7 +16,7 @@ class TestEventControllerBulkUpdate:
         """
         event = EventFactory(owner=user, group=default_event_group)
         data_list = [{"uuid": event.uuid}]
-        EventController().bulk_delete(user, data_list)
+        EventLogicService().bulk_delete(user, data_list)
 
         assert not Event.objects.filter(id=event.id).exists()
 
@@ -30,7 +30,7 @@ class TestEventControllerBulkUpdate:
             EventFactory(owner=user, group=default_event_group),
         ]
         data_list = [{"uuid": events[0].uuid}]
-        EventController().bulk_delete(user, data_list)
+        EventLogicService().bulk_delete(user, data_list)
 
         assert not Event.objects.filter(id=events[0].id).exists()
         assert Event.objects.filter(id=events[1].id).exists()

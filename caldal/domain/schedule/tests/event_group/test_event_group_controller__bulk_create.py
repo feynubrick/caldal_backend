@@ -2,8 +2,8 @@ import pytest
 from faker import Faker
 from faker.providers import color
 
-from caldal.domain.schedule.controllers.event_group_controller import (
-    EventGroupController,
+from caldal.domain.schedule.services.logic.event_group_logic_service import (
+    EventGroupLogicService,
 )
 from caldal.domain.schedule.models import EventGroup
 from caldal.util.test.factories.account.user_factory import UserFactory
@@ -25,7 +25,7 @@ class TestEventGroupControllerBulkCreate:
                 "order_index": 0,
             }
         ]
-        EventGroupController().bulk_create(user, data_list)
+        EventGroupLogicService().bulk_create(user, data_list)
 
         event_group = EventGroup.objects.first()
         assert str(event_group.uuid) == data_list[0]["uuid"]
@@ -49,7 +49,7 @@ class TestEventGroupControllerBulkCreate:
                 "order_index": 1,
             },
         ]
-        EventGroupController().bulk_create(user, data_list)
+        EventGroupLogicService().bulk_create(user, data_list)
 
         event_groups = EventGroup.objects.order_by("order_index")
         for event_group, data in zip(event_groups, data_list):

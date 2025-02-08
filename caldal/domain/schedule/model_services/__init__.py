@@ -1,2 +1,0 @@
-from .event_group_model_service import EventGroupModelService
-from .event_model_service import EventModelService

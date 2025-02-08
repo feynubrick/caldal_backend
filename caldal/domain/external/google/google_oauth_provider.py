@@ -2,7 +2,7 @@ from django.conf import settings
 from google.auth.transport.requests import Request
 from google.oauth2 import id_token
 
-from caldal.domain.account.interfaces.oauth_interface import OAuthProvider
+from caldal.domain.common.auth.oauth_provider import OAuthProvider
 from caldal.domain.account.schemas.auth_schemas import IdTokenInfoSchema
 
 

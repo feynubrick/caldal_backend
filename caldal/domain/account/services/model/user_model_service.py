@@ -1,5 +1,5 @@
 from caldal.domain.account.models import User
-from caldal.util.services import ModelService
+from caldal.domain.common.service.model_service import ModelService
 
 
 class UserModelService(ModelService):

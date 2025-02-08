@@ -4,7 +4,7 @@ import pytest
 from faker import Faker
 
 from caldal.domain.schedule.consts.enums import EventTypeEnum
-from caldal.domain.schedule.controllers.event_controller import EventController
+from caldal.domain.schedule.services.logic.event_logic_service import EventLogicService
 from caldal.domain.schedule.models import Event
 from caldal.util.test.factories.schedule.event_group_factory import EventGroupFactory
 from caldal.util.uuid import generate_uuid
@@ -31,7 +31,7 @@ class TestEventControllerBulkCreate:
                 "timezone": "Asia/Seoul",
             }
         ]
-        EventController().bulk_create(user, data_list)
+        EventLogicService().bulk_create(user, data_list)
 
         created_event = Event.objects.get(uuid=event_uuid)
         assert created_event.type == data_list[0]["type"]
@@ -68,7 +68,7 @@ class TestEventControllerBulkCreate:
             },
         ]
 
-        EventController().bulk_create(user, data_list)
+        EventLogicService().bulk_create(user, data_list)
         for data in data_list:
             created_event = Event.objects.get(uuid=data["uuid"])
             assert created_event.type == data["type"]
@@ -107,7 +107,7 @@ class TestEventControllerBulkCreate:
             },
         ]
 
-        EventController().bulk_create(user, data_list)
+        EventLogicService().bulk_create(user, data_list)
         for data, group in zip(data_list, [default_event_group, second_event_group]):
             created_event = Event.objects.get(uuid=data["uuid"])
             assert created_event.type == data["type"]

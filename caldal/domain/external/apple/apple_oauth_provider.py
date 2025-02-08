@@ -5,7 +5,7 @@ from django.utils import timezone
 from jwt.algorithms import RSAAlgorithm
 
 from caldal.domain.account.const.enums import PlatformEnum
-from caldal.domain.account.interfaces.oauth_interface import OAuthProvider
+from caldal.domain.common.auth.oauth_provider import OAuthProvider
 from caldal.domain.account.schemas import IdTokenInfoSchema
 
 

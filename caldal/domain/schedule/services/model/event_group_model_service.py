@@ -1,5 +1,5 @@
 from caldal.domain.schedule.models import EventGroup
-from caldal.util.services.model_service import ModelService
+from caldal.domain.common.service.model_service import ModelService
 
 
 class EventGroupModelService(ModelService):

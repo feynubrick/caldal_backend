@@ -2,8 +2,8 @@ import pytest
 from faker import Faker
 from faker.providers import color
 
-from caldal.domain.schedule.controllers.event_group_controller import (
-    EventGroupController,
+from caldal.domain.schedule.services.logic.event_group_logic_service import (
+    EventGroupLogicService,
 )
 from caldal.util.test.factories.account.user_factory import UserFactory
 from caldal.util.test.factories.schedule.event_group_factory import EventGroupFactory
@@ -27,7 +27,7 @@ class TestEventGroupControllerBulkUpdate:
             }
         ]
 
-        EventGroupController().bulk_update(user, data_list)
+        EventGroupLogicService().bulk_update(user, data_list)
 
         event_group.refresh_from_db()
         data = data_list[0]
@@ -50,7 +50,7 @@ class TestEventGroupControllerBulkUpdate:
             for i, group in enumerate(event_groups)
         ]
 
-        EventGroupController().bulk_update(user, data_list)
+        EventGroupLogicService().bulk_update(user, data_list)
 
         for event_group, data in zip(event_groups, data_list):
             event_group.refresh_from_db()

@@ -1,14 +1,14 @@
-from caldal.domain.account.model_services import (
+from caldal.domain.account.models import User
+from caldal.domain.account.services.model import (
     OAuthProfileModelService,
     UserModelService,
 )
-from caldal.domain.account.models import User
-from caldal.util.services.business_service import BusinessService
+from caldal.domain.common.service.logic_service import LogicService
 
-from .create_user_service_input_schema import CreateUserServiceInputSchema
+from .create_user_logic_service_input_schema import CreateUserServiceInputSchema
 
 
-class CreateUserService(BusinessService[CreateUserServiceInputSchema, User]):
+class CreateUserService(LogicService[CreateUserServiceInputSchema, User]):
     def _before_run(self, data: CreateUserServiceInputSchema):
         pass
 
@@ -25,7 +25,7 @@ class CreateUserService(BusinessService[CreateUserServiceInputSchema, User]):
         return user
 
     def _after_run(self, data: CreateUserServiceInputSchema, return_val: User):
-        from caldal.domain.schedule.model_services import ScheduleGroupModelService
+        from caldal.domain.schedule.services.model import EventGroupModelService
 
         user = return_val
-        ScheduleGroupModelService().create_schedule_group(owner=user, is_default=True)
+        EventGroupModelService().create(owner=user)

@@ -7,7 +7,7 @@ ReturnType = TypeVar("ReturnType")
 InputType = TypeVar("InputType", bound=Schema)
 
 
-class BusinessService(Generic[InputType, ReturnType], ABC):
+class LogicService(Generic[InputType, ReturnType], ABC):
     def run(self, data: InputType):
         self._before_run(data)
         return_val = self._run(data)

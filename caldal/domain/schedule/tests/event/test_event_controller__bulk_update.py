@@ -4,7 +4,7 @@ import pytest
 from faker import Faker
 from faker.providers import date_time
 
-from caldal.domain.schedule.controllers.event_controller import EventController
+from caldal.domain.schedule.services.logic.event_logic_service import EventLogicService
 from caldal.util.test.factories.schedule.event_factory import EventFactory
 from caldal.util.test.factories.schedule.event_group_factory import EventGroupFactory
 
@@ -34,7 +34,7 @@ class TestEventControllerBulkUpdate:
                 "timezone": "Asia/Seoul",
             },
         ]
-        EventController().bulk_update(user, data_list)
+        EventLogicService().bulk_update(user, data_list)
 
         event.refresh_from_db()
         assert str(event.uuid) == str(data_list[0]["uuid"])
@@ -71,7 +71,7 @@ class TestEventControllerBulkUpdate:
                 key: value,
             }
         ]
-        EventController().bulk_update(user, data_list)
+        EventLogicService().bulk_update(user, data_list)
 
         event.refresh_from_db()
         data = data_list[0]
