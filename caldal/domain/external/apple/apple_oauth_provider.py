@@ -6,7 +6,7 @@ from jwt.algorithms import RSAAlgorithm
 
 from caldal.domain.account.const.enums import PlatformEnum
 from caldal.domain.common.auth.oauth_provider import OAuthProvider
-from caldal.domain.account.schemas import IdTokenInfoSchema
+from caldal.domain.common.auth.schemas import IdTokenInfoSchema
 
 
 class AppleOAuthProvider(OAuthProvider):

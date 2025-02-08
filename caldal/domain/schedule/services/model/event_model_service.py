@@ -5,7 +5,7 @@ from ninja.errors import HttpError
 from caldal.domain.schedule.models import Event
 from caldal.util.consts import DAY_TO_SECONDS
 from caldal.util.datetime import compare_timezone_str_to_datetime
-from caldal.domain.common.service.model_service import ModelService
+from caldal.domain.common.services.model_service import ModelService
 
 
 class EventModelService(ModelService):

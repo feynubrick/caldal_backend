@@ -7,8 +7,8 @@ from faker.providers import color
 
 from caldal.domain.schedule.consts.enums import EventTypeEnum
 from caldal.domain.schedule.models import Event
-from caldal.util.test.factories.account.user_factory import UserFactory
-from caldal.util.test.factories.schedule.event_group_factory import EventGroupFactory
+from caldal.domain.common.factories.account.user_factory import UserFactory
+from caldal.domain.common.factories.schedule.event_group_factory import EventGroupFactory
 from caldal.util.uuid import generate_uuid
 
 fake = Faker()

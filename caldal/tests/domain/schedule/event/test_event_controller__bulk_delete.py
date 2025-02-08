@@ -3,7 +3,7 @@ from faker import Faker
 
 from caldal.domain.schedule.services.logic.event_logic_service import EventLogicService
 from caldal.domain.schedule.models import Event
-from caldal.util.test.factories.schedule.event_factory import EventFactory
+from caldal.domain.common.factories.schedule import EventFactory
 
 fake = Faker()
 

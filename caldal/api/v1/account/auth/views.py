@@ -1,62 +1,40 @@
 from ninja import Router
 from ninja_jwt.schema import TokenObtainPairOutputSchema, TokenRefreshInputSchema
 
-from caldal.domain.account.const.enums import OAuthProviderEnum
-from caldal.domain.account.services.logic import (
-    CreateUserService,
-    CreateUserServiceInputSchema,
-)
-from caldal.domain.account.services.model import UserModelService
-from caldal.domain.common.auth.auth_token_service import AuthTokenService
-from caldal.domain.common.auth.oauth_service import OAuthService
+from caldal.api.v1.account.auth.schemas import ProcessOAuthInSchema
+from caldal.domain.account.const.enums import OAuthProviderCodeEnum
+from caldal.domain.account.controllers.auth.oauth_controller import OAuthController
 
-router = Router(tags=["auth"], auth=None)
+router = Router(tags=["auth"])
 
 
 @router.post(
     "/{provider}",
     response={(200, 201): TokenObtainPairOutputSchema},
+    auth=None,
 )
-def process_oauth(request, provider: OAuthProviderEnum, req_body):
-    id_info = OAuthService(provider, req_body.platform).verify_token(req_body.token)
-    identifier = id_info.sub
-    email = id_info.email
-
-    is_new_user = False
-    if UserModelService().exists(
-        oauth_profiles__provider=provider,
-        oauth_profiles__identifier=identifier,
-    ):
-        user = UserModelService().get(
-            oauth_profiles__provider=provider,
-            oauth_profiles__identifier=identifier,
-        )
-    else:
-        user = CreateUserService().run(
-            CreateUserServiceInputSchema(
-                email=email,
-                provider=provider,
-                identifier=identifier,
-            )
-        )
-        is_new_user = True
-
-    auth_service = AuthTokenService(user)
-    refresh_token = auth_service.get_refresh_token()
-    access_token = auth_service.get_access_token()
-
+def oauth_authenticate(
+    request,
+    provider: OAuthProviderCodeEnum,
+    payload: ProcessOAuthInSchema,
+):
+    is_new_user, user, tokens = OAuthController(
+        provider,
+        platform=payload.platform,
+    ).oauth_authenticate(token=payload.token)
     status_code = 201 if is_new_user else 200
 
     return status_code, {
-        "email": email,
-        "refresh": refresh_token,
-        "access": access_token,
+        "email": user.email,
+        "access": str(tokens["access"]),
+        "refresh": str(tokens["refresh"]),
     }
 
 
 @router.post(
     "/refresh",
     response={200: TokenRefreshInputSchema.get_response_schema()},
+    auth=None,
 )
-def process_token(request, req_body: TokenRefreshInputSchema):
+def refresh_token(request, req_body: TokenRefreshInputSchema):
     return req_body.to_response_schema()

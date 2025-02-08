@@ -5,8 +5,8 @@ from faker import Faker
 from faker.providers import date_time
 
 from caldal.domain.schedule.services.logic.event_logic_service import EventLogicService
-from caldal.util.test.factories.schedule.event_factory import EventFactory
-from caldal.util.test.factories.schedule.event_group_factory import EventGroupFactory
+from caldal.domain.common.factories.schedule import EventFactory
+from caldal.domain.common.factories.schedule import EventGroupFactory
 
 fake = Faker()
 fake.add_provider(date_time)

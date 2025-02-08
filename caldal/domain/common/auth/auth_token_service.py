@@ -1,4 +1,4 @@
-from ninja_jwt.tokens import RefreshToken
+from ninja_jwt.tokens import RefreshToken, Token
 
 from caldal.domain.account.models import User
 
@@ -11,8 +11,14 @@ class AuthTokenService:
     def _create_refresh_token(self):
         return RefreshToken.for_user(user=self.user)
 
-    def get_refresh_token(self) -> str:
-        return str(self.refresh_token)
+    def get_refresh_token(self) -> Token:
+        return self.refresh_token
 
-    def get_access_token(self) -> str:
-        return str(self.refresh_token.access_token)
+    def get_access_token(self) -> Token:
+        return self.refresh_token.access_token
+
+    def get_both_tokens(self):
+        return {
+            "refresh": self.get_refresh_token(),
+            "access": self.get_access_token(),
+        }

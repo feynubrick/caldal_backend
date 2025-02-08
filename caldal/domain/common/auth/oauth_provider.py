@@ -1,7 +1,7 @@
 from abc import ABC
 
 from caldal.domain.account.const.enums import PlatformEnum
-from caldal.domain.account.schemas import IdTokenInfoSchema
+from caldal.domain.common.auth.schemas import IdTokenInfoSchema
 
 
 class OAuthProvider(ABC):

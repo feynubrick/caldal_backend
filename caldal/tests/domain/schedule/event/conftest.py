@@ -1,8 +1,8 @@
 import pytest
 from faker import Faker
 
-from caldal.util.test.factories.account.user_factory import UserFactory
-from caldal.util.test.factories.schedule.event_group_factory import EventGroupFactory
+from caldal.domain.common.factories.account.user_factory import UserFactory
+from caldal.domain.common.factories.schedule import EventGroupFactory
 
 fake = Faker()
 

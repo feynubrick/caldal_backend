@@ -3,7 +3,7 @@ from google.auth.transport.requests import Request
 from google.oauth2 import id_token
 
 from caldal.domain.common.auth.oauth_provider import OAuthProvider
-from caldal.domain.account.schemas.auth_schemas import IdTokenInfoSchema
+from caldal.domain.common.auth.schemas import IdTokenInfoSchema
 
 
 class GoogleOAuthProvider(OAuthProvider):

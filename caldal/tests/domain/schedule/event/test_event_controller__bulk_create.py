@@ -6,7 +6,7 @@ from faker import Faker
 from caldal.domain.schedule.consts.enums import EventTypeEnum
 from caldal.domain.schedule.services.logic.event_logic_service import EventLogicService
 from caldal.domain.schedule.models import Event
-from caldal.util.test.factories.schedule.event_group_factory import EventGroupFactory
+from caldal.domain.common.factories.schedule import EventGroupFactory
 from caldal.util.uuid import generate_uuid
 
 fake = Faker()
