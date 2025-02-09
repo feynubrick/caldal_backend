@@ -21,7 +21,7 @@ def token_from_app():
 
 
 @pytest.mark.django_db
-class TestAuth:
+class TestOAuthAuthenticate:
     @pytest.mark.parametrize("provider", ["google", "apple"])
     @pytest.mark.parametrize("platform", ["IOS", "ANDROID"])
     @patch("google.oauth2.id_token.verify_token")

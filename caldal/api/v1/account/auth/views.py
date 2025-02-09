@@ -9,6 +9,15 @@ router = Router(tags=["auth"])
 
 
 @router.post(
+    "/refresh",
+    response={200: TokenRefreshInputSchema.get_response_schema()},
+    auth=None,
+)
+def refresh_token(request, req_body: TokenRefreshInputSchema):
+    return req_body.to_response_schema()
+
+
+@router.post(
     "/{provider}",
     response={(200, 201): TokenObtainPairOutputSchema},
     auth=None,
@@ -29,12 +38,3 @@ def oauth_authenticate(
         "access": str(tokens["access"]),
         "refresh": str(tokens["refresh"]),
     }
-
-
-@router.post(
-    "/refresh",
-    response={200: TokenRefreshInputSchema.get_response_schema()},
-    auth=None,
-)
-def refresh_token(request, req_body: TokenRefreshInputSchema):
-    return req_body.to_response_schema()
